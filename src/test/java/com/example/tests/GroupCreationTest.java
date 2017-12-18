@@ -1,27 +1,45 @@
 package com.example.tests;
 
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class GroupCreationTest extends TestBase {
+    @DataProvider
+    public Iterator<Object[]> randomValidGroupGenerator(){
+        List<Object[]> list = new ArrayList<>();
 
-    @Test
-    public void testNonEmptyGroupCreation() throws Exception {
+        // code
+        for (int i=0; i<5; i++){
+            GroupData group = new GroupData();
+            group.groupName = generateRandomString();
+            group.header = generateRandomString();
+            group.footer = generateRandomString();
+            list.add(new Object[]{group});
+        }
+        return list.iterator();
+    }
+
+    public String generateRandomString(){
+        Random rnd = new Random();
+        if (rnd.nextInt(3) == 0){
+            return "";
+        } else {
+            return "RandomName" + rnd.nextInt();
+        }
+    }
+
+    @Test(dataProvider = "randomValidGroupGenerator")
+    public void testGroupCreationWithValidData(GroupData group) throws Exception {
         app.getNavigationHelper().openMainPage();
         app.getNavigationHelper().goToGroupsPage();
         // save old state
         List<GroupData> oldList = app.getGroupHelper().getGroups();
         // actions
         app.getGroupHelper().initNewGroupCreation();
-        GroupData group= new GroupData();
-        group.groupName = "bbb";
-        group.header = "header_1";
-        group.footer = "footer_1";
         app.getGroupHelper().fillGroupForm(group);
         app.getGroupHelper().submitGroupCreation();
         app.getGroupHelper().returnToGroupsPage();
@@ -34,15 +52,4 @@ public class GroupCreationTest extends TestBase {
         assertEquals(newList, oldList);
 
     }
-
-    @Test
-    public void testEmptyGroupCreation() throws Exception {
-        app.getNavigationHelper().openMainPage();
-        app.getNavigationHelper().goToGroupsPage();
-        app.getGroupHelper().initNewGroupCreation();
-        app.getGroupHelper().fillGroupForm(new GroupData("", "", ""));
-        app.getGroupHelper().submitGroupCreation();
-        app.getGroupHelper().returnToGroupsPage();
-    }
-
 }
