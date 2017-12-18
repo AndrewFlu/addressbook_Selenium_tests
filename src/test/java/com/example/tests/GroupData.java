@@ -28,7 +28,7 @@ public class GroupData implements Comparable<GroupData>{
 
     @Override
     public String toString() {
-        return "GroupData{" + "groupName='" + groupName + '\'' + '}';
+        return "GroupData{" + "groupName=" + groupName + '\'' + '}';
     }
 
     @Override
@@ -43,6 +43,6 @@ public class GroupData implements Comparable<GroupData>{
 
 
     public int compareTo(GroupData other) {
-        return other.groupName.compareTo(this.groupName);
+        return this.groupName.toLowerCase().compareTo(other.groupName.toLowerCase());
     }
 }
