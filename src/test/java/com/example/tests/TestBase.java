@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeSuite;
 
 public class TestBase {
 
-    public ApplicationManager app;
+    public static ApplicationManager app;
 
     @BeforeSuite
     public void setUp() throws Exception {

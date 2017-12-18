@@ -20,7 +20,7 @@ public class ContactCreationTest extends TestBase {
         contact.day = "10";
         contact.month = "September";
         contact.year = "1984";
-        contact.groupName = "group name 1";
+        contact.groupName = "group_name_1";
         app.getContactHelper().fillContactForm(contact);
         app.getContactHelper().submitNewContactCreation();
         app.getContactHelper().returnToMainPage();

@@ -18,7 +18,7 @@ public class ApplicationManager {
         System.setProperty("webdriver.gecko.driver", "C:\\Users\\Andrew\\IdeaProjects\\addressbook_Selenium_tests\\" +
                 "src\\main\\resources\\drivers\\geckodriver\\geckodriver.exe");
         driver = new FirefoxDriver();
-        baseUrl = "http://localhost/";
+        baseUrl = "http://localhost/"+ "/addressbookv4.1.4/?lang=en";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
     }
