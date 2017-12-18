@@ -30,7 +30,6 @@ public class GroupCreationTest extends TestBase {
 
         // compare states
         oldList.add(group);
-
         Collections.sort(oldList);
         assertEquals(newList, oldList);
 
